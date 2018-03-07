@@ -18,7 +18,6 @@ namespace Test_Importer.ImporterFolder
         List<IWorksheetImport> worksheetImporterList;
         List<string> inputColumnNames;
         DataTable tableFromSheet;
-        DataTable tableToInsert;
         List<Tuple<string, string, DataTable>> tupleToImport = new List<Tuple<string, string, DataTable>>();
 
         public void Dispose()

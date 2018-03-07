@@ -10,48 +10,43 @@ using System.Threading.Tasks;
 
 namespace Test_Importer.ImporterFolder
 {
-    class Import_Hierarchy_View : IWorksheetImport
+    class Import_Hierarchy_View : WorkSheetImporterAbstractClass
     {
         List<string> validColumnNames = new List<string>();
-        DataTable tableToInsert = new DataTable();
-        List<string> ValidColumnNamesCompare = new List<string>();
-        List<string> columnDifferences = new List<string>();
 
-        public void Dispose()
+        public override void Dispose()
         {
+            base.Dispose();
             validColumnNames = null;
-            ValidColumnNamesCompare = null;
-            columnDifferences = null;
-            tableToInsert.Dispose();
         }
 
 
-        public string GetClientOid()
+        public override string GetClientOid()
         {
             //Client: APV Client One
             return "337E56C5-E61A-4390-86B1-27129C82D0D1";
         }
 
 
-        public string GetWorksheetName()
+        public override string GetWorksheetName()
         {
             return "Hierarchy View";
         }
         
 
-        public string GetTvpParameter()
+        public override string GetTvpParameter()
         {
             return "dbo.AssetHierarchyTVP";
         }
 
 
-        public string GetProcName()
+        public override string GetProcName()
         {
             return "dbo.Import_AssetHierarchy";
         }
 
 
-        public List<string> GetValidColumnNames()
+        public override List<string> GetValidColumnNames()
         {
             validColumnNames = new List<string>();
             validColumnNames.Add("AssetClass");
@@ -63,66 +58,7 @@ namespace Test_Importer.ImporterFolder
             validColumnNames.Add("Code");
             return validColumnNames;
         }
-
-
-        public bool ValidateWorksheetName(string name)
-        {
-            return name == GetWorksheetName();
-        }
-
-
-        public bool VlidateWorksheetColumns(List<string> inputColumnNames)
-        {
-            ValidColumnNamesCompare = new List<string>();
-            validColumnNames = GetValidColumnNames();
-            foreach (string columnName in validColumnNames)
-            {
-                string columnNameToAdd = Regex.Replace(columnName, "[^\\w\\._]", "");
-                ValidColumnNamesCompare.Add(columnNameToAdd.Trim().ToLower().Replace(" ", ""));
-            }
-
-            int countValidColumns = ValidColumnNamesCompare.Count;
-            int countVlidColumnPresent = 0;
-            foreach (string columnName in ValidColumnNamesCompare)
-            {
-                if (inputColumnNames.Contains(columnName))
-                {
-                    countVlidColumnPresent++;
-                }
-            }
-
-            if (countValidColumns == countVlidColumnPresent) return true;
-            return false;
-
-        }
-
-
-        public DataTable PrepareTableToInsert(DataTable tableFromSheet)
-        {
-            tableToInsert = new DataTable();
-            tableToInsert.Columns.Add("RowNumber", typeof(string));
-            tableToInsert.Columns.Add("ClientOid", typeof(string));
-            foreach (string columnName in validColumnNames)
-            {
-                tableToInsert.Columns.Add(columnName, typeof(string));
-            }
-
-            int rowNo = 1;
-            foreach (DataRow row in tableFromSheet.Rows)
-            {
-                DataRow rowToInsert = tableToInsert.NewRow();
-                rowToInsert["RowNumber"] = rowNo.ToString();
-                rowToInsert["clientOid"] = GetClientOid();
-                foreach (string columnName in ValidColumnNamesCompare)
-                {
-                    rowToInsert[columnName] = row[columnName];
-                }
-                tableToInsert.Rows.Add(rowToInsert);
-                rowNo++;
-            }
-            return tableToInsert;
-        }
-
+        
 
     }
 }
