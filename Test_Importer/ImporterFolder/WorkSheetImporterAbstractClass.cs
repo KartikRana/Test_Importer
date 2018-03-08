@@ -10,9 +10,9 @@ namespace Test_Importer.ImporterFolder
 {
     public abstract class WorkSheetImporterAbstractClass : IWorksheetImport, IDisposable
     {
-        public List<string> ValidColumnNamesCompare { get; private set; }
-        private List<string> validColumnNames;
-        private DataTable tableToInsert;
+        private List<string> ValidColumnNamesCompare = new List<string>();
+        private List<string> validColumnNames = new List<string>();
+        private DataTable tableToInsert = new DataTable();
 
         public virtual void Dispose()
         {
@@ -55,7 +55,7 @@ namespace Test_Importer.ImporterFolder
 
         public virtual bool ValidateWorksheetName(string name)
         {
-            return name == GetWorksheetName();
+            return name.Trim().ToLower().Replace(" ", "") == GetWorksheetName().Trim().ToLower().Replace(" ", "");
         }
 
         public virtual bool VlidateWorksheetColumns(List<string> inputColumnNames)

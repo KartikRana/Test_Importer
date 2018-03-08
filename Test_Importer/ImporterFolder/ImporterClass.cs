@@ -14,10 +14,10 @@ namespace Test_Importer.ImporterFolder
 {
     class ImporterClass : IDisposable
     {
-        ExcelPackage package;
-        List<IWorksheetImport> worksheetImporterList;
-        List<string> inputColumnNames;
-        DataTable tableFromSheet;
+        ExcelPackage package = new ExcelPackage();
+        List<IWorksheetImport> worksheetImporterList = new List<IWorksheetImport>();
+        List<string> inputColumnNames = new List<string>();
+        DataTable tableFromSheet = new DataTable();
         List<Tuple<string, string, DataTable>> tupleToImport = new List<Tuple<string, string, DataTable>>();
 
         public void Dispose()
@@ -35,6 +35,7 @@ namespace Test_Importer.ImporterFolder
             worksheetImporterList.Add(new Import_Hierarchy_View());
             worksheetImporterList.Add(new Import_Financial_Sub_Class());
             worksheetImporterList.Add(new Import_FairValue_Measurement_Class());
+            worksheetImporterList.Add(new Import_Component_Level_Assumptions());
         }
 
 

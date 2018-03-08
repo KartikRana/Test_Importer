@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Test_Importer.ImporterFolder
 {
-    public class Import_Financial_Sub_Class : WorkSheetImporterAbstractClass
+    class Import_Component_Level_Assumptions : WorkSheetImporterAbstractClass
     {
         List<string> validColumnNames = new List<string>();
 
@@ -26,27 +24,41 @@ namespace Test_Importer.ImporterFolder
 
         public override string GetProcName()
         {
-            return "dbo.Import_FinancialSubClass";
+            return "dbo.Import_ComponentLevelAssumptions";
         }
 
         public override string GetTvpParameter()
         {
-            return "dbo.FinancialSubClassTVP";
+            return "dbo.ComponentLevelAssumptionTVP";
         }
 
         public override List<string> GetValidColumnNames()
         {
-            validColumnNames = new List<string>();
-            validColumnNames.Add("FinancialAssetClass");
-            validColumnNames.Add("FinancialSubClass");
+            validColumnNames = new List<string>()
+            {
+                "UnitRate",
+                "LocalityFactor",
+                "LongLifePerc",
+                "UsefulLifeShortMin",
+                "UsefulLifeShortMax",
+                "RVPercentageShort",
+                "UsefulLifeLong",
+                "RVPercentageLong",
+                "ComponentSubType",
+                "ComponentType",
+                "Component",
+                "Code",
+                "AssetSubType",
+                "AssetType",
+                "AssetClass",
+                "DepreciationPolicy"
+            };
             return validColumnNames;
         }
 
         public override string GetWorksheetName()
         {
-            return "Financial Sub-Class Report";
+            return "Component Level Assumptions";
         }
-        
-
     }
 }

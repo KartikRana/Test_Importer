@@ -34,7 +34,8 @@ namespace Test_Importer.ImporterFolder
                         }
                         else
                         {
-                            string cellToAdd = Regex.Replace(sheet.Cells[row, col].Value.ToString(), "[^\\w\\._]", "");
+                            string cellToAdd = sheet.Cells[row, col].Value.ToString().Replace("%","Percentage");
+                            cellToAdd = Regex.Replace(cellToAdd, "[^\\w\\._]", "");
                             tableFromSheet.Columns.Add(cellToAdd.Trim().ToLower().Replace(" ", ""), typeof(string));
                         }
                     }

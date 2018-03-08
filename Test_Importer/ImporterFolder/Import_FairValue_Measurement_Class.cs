@@ -14,8 +14,8 @@ namespace Test_Importer.ImporterFolder
 
         public override void Dispose()
         {
-            base.Dispose();
             validColumnNames = null;
+            base.Dispose();
         }
 
         public override string GetClientOid()

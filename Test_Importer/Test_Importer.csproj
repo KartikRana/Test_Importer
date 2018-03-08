@@ -67,6 +67,7 @@
     <Compile Include="ImporterFolder\ErrorRow.cs" />
     <Compile Include="ImporterFolder\ExcelPackageClass.cs" />
     <Compile Include="ImporterFolder\ImporterClass.cs" />
+    <Compile Include="ImporterFolder\Import_Component_Level_Assumptions.cs" />
     <Compile Include="ImporterFolder\Import_FairValue_Measurement_Class.cs" />
     <Compile Include="ImporterFolder\Import_Financial_Sub_Class.cs" />
     <Compile Include="ImporterFolder\Import_Hierarchy_View.cs" />
